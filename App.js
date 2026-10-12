@@ -110,4 +110,11 @@ const filteredItems = menuItems.filter((item) =>{
    return matchesSearch && matchesCourse;
 });
 
-//
+//menu statistics Callculationd ---
+const toatlItems = menuItems. length;
+const avaragePrice = 
+totalItems > 0
+? (
+    menuItems.reduce ((sum. item)) => + item.price. 0/ totalItems
+) . toFixed(2)
+: '0.00';
