@@ -52,7 +52,7 @@ if (editingId) {
     setSuccessMessage('menu item successfuly updated!');
     setEditingId(null);
 } else {
-    
+
     // Add new menu item 
     const newItem = { id: Date.now().toSting (),
         dishName,
@@ -79,4 +79,23 @@ const handleEditItem = (item) => {
     setEditingId( item.id);
     setErrorMessage('');
     setSuccessMessage('');
+};
+
+const handleDeleteItem = (id) => {
+    Alert.alert(
+        'Delete Item', 
+        'Are you sure you want to delete this menu item',
+        [
+            { text: 'Cancel', style: 'cancel'},
+            {
+                text: 'Delete',
+                style: 'destructive',
+                onPress: () => {
+                    setMenuItems(menuItems.filter((item) => item.id !== id));
+                    setSuccessMessage('Menu item deleted successfully.');
+                },
+            },
+        ]
+    
+    );
 };
