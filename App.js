@@ -23,7 +23,7 @@ const [successMessage, setSuccessMessage] = useState('');
 //manage menu items 
 const handleSaveItem = () => {
     //Input validation for required fields
-    if (!dishName.trim() || !description.trim() || !price.trim() ){
+    if (!dishName.trim() || !description.trim() || !price.trim() ) {
         setErrorMessage('All fields are required.');
         setSuccessMessage('');
         return;
@@ -52,5 +52,31 @@ if (editingId) {
     setSuccessMessage('menu item successfuly updated!');
     setEditingId(null);
 } else {
-    //
+    
+    // Add new menu item 
+    const newItem = { id: Date.now().toSting (),
+        dishName,
+        description,
+        course,
+        price: parsedPrice
+    };
+    setMenuItems([...menuItems, newItem]);
+    setSuccessMessage(' Menu item successfully added!');
 }
+
+//Reset form and errors 
+setDishName('');
+setDescription('');
+setCourse('');
+setErrorMessage('');
+};
+
+const handleEditItem = (item) => {
+    setDishName( item.dishName);
+    SeyDescription( item.description);
+    setCourse( item.course);
+    setPrice( item.price.toString());
+    setEditingId( item.id);
+    setErrorMessage('');
+    setSuccessMessage('');
+};
