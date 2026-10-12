@@ -99,3 +99,15 @@ const handleDeleteItem = (id) => {
     
     );
 };
+
+//Search and Filter logic ---
+const filteredItems = menuItems.filter((item) =>{
+    const matchesSearch = item.dishName
+    .toLowerCase()
+    .includes(searchQuery.toLowerCase());
+   const matchesCourse=
+   selectedFilterCourse ==='All' || item.course === selectedFilterCourse;
+   return matchesSearch && matchesCourse;
+});
+
+//
