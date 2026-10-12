@@ -148,11 +148,349 @@ return(
          {successMessage ? <Text style={styles.successText}>{successMessage}</Text> : null}
 
          <TextInput
-         style={styles.onput}
+         style={styles.input}
          placeholder="Dish Name"
-         placeholder
+         placeholderTextColor="#888"
+         value={dishName}
+         onChangeText={setDishName}
+         />
 
+         <TextInput
+         tyle={styles.input}
+         placeholder="Description"
+         placeholderTextColor="#888"
+         value={description}
+         onChangeText={setDescription}
+         />
+
+{/* Course selection Buttons */}
+<Text style={styles.label}>select Course:</Text>
+<View style={Styles.courseSelectRow}>
+    {['Starter', 'Main Course', 'Dessert']. map((c) => (
+        <TouchableOpacity
+        key={c}
+        style={[
+            styles.courseBtn.
+            course === c && styles.courseBtnActive,
+        ]}
+        onPress={() => setCourse(c)}
+        >
+            <Text
+            style={[
+                styles.courseBtnText,
+                course === c && styles.courseBtnTextActive, 
+            ]}
+        >
+            {c}
+            </Text>
+            </TouchableOpacity>
+    ))}
+    </View>
+
+    TextInput
+          style={styles.input}
+          placeholder="Price (R)"
+          placeholderTextColor="#888"
+          keyboardType="numeric"
+          value={price}
+          onChangeText={setPrice}
+        />
+
+        <TouchableOpacity style={styles.primaryBtn} onPress={handleSaveItem}>
+          <Text style={styles.primaryBtnText}>
+            {editingId ? 'Update Item' : 'Add Item'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* --- SEARCH & FILTER SECTION --- */}
+      <View style={styles.filterContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Search by dish name..."
+          placeholderTextColor="#888"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+
+        <Text style={styles.label}>Filter by Course:</Text>
+        <View style={styles.courseSelectRow}>
+          {['All', 'Starter', 'Main Course', 'Dessert'].map((c) => (
+            <TouchableOpacity
+              key={c}
+              style={[
+                styles.filterBtn,
+                selectedFilterCourse === c && styles.filterBtnActive,
+              ]}
+              onPress={() => setSelectedFilterCourse(c)}
+            >
+              <Text
+                style={[
+                  styles.filterBtnText,
+                  selectedFilterCourse === c && styles.filterBtnTextActive,
+                ]}
+              >
+                {c}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+
+      {/* --- DISPLAY MENU ITEMS --- */}
+      <View style={styles.listContainer}>
+        <Text style={styles.sectionTitle}>Menu Items List</Text>
+        {filteredItems.length === 0 ? (
+          <Text style={styles.emptyText}>No menu items found.</Text>
+        ) : (
+          filteredItems.map((item) => (
+            <View key={item.id} style={styles.itemCard}>
+              <View style={styles.itemDetails}>
+                <Text style={styles.itemName}>{item.dishName}</Text>
+                <Text style={styles.itemCourse}>Course: {item.course}</Text>
+                <Text style={styles.itemDesc}>{item.description}</Text>
+                <Text style={styles.itemPrice}>R {item.price.toFixed(2)}</Text>
+              </View>
+              <View style={styles.actionRow}>
+                <TouchableOpacity
+                  style={styles.editBtn}
+                  onPress={() => handleEditItem(item)}
+                >
+                  <Text style={styles.actionBtnText}>Edit</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.deleteBtn}
+                  onPress={() => handleDeleteItem(item.id)}
+                >
+                  <Text style={styles.actionBtnText}>Delete</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))
+        )}
+      </View>
+    </ScrollView>
+  );
+}
+
+// --- STYLESHEET ---
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    backgroundColor: '#f8f9fa',
+    paddingTop: 50,
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#333',
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#444',
+  },
+  statsCard: {
+    backgroundColor: '#e9ecef',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+  statsTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#212529',
+  },
+  statsText: {
+    fontSize: 14,
+    color: '#495057',
+    marginBottom: 3,
+  },
+  courseCountRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 8,
+  },
+  statsSubText: {
+    fontSize: 12,
+    color: '#6c757d',
+    fontWeight: '500',
+  },
+  formContainer: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ced4da',
+    borderRadius: 6,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: '#fff',
+    color: '#000',
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: '500',
+    marginBottom: 5,
+    color: '#495057',
+  },
+  courseSelectRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  courseBtn: {
+    flex: 1,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: '#ced4da',
+    alignItems: 'center',
+    marginHorizontal: 2,
+    borderRadius: 6,
+  },
+  courseBtnActive: {
+    backgroundColor: '#007bff',
+    borderColor: '#007bff',
+  },
+  courseBtnText: {
+    fontSize: 12,
+    color: '#495057',
+  },
+  courseBtnTextActive: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  filterContainer: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+  filterBtn: {
+    flex: 1,
+    padding: 6,
+    borderWidth: 1,
+    borderColor: '#ced4da',
+    alignItems: 'center',
+    marginHorizontal: 2,
+    borderRadius: 6,
+  },
+  filterBtnActive: {
+    backgroundColor: '#28a745',
+    borderColor: '#28a745',
+  },
+  filterBtnText: {
+    fontSize: 11,
+    color: '#495057',
+  },
+  filterBtnTextActive: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  primaryBtn: {
+    backgroundColor: '#007bff',
+    padding: 12,
+    borderRadius: 6,
+    alignItems: 'center',
+    marginTop: 5,
+  },
+  primaryBtnText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  errorText: {
+    color: '#dc3545',
+    marginBottom: 10,
+    fontSize: 14,
+  },
+  successText: {
+    color: '#28a745',
+    marginBottom: 10,
+    fontSize: 14,
+  },
+  listContainer: {
+    marginBottom: 30,
+  },
+  emptyText: {
+    textAlign: 'center',
+    color: '#6c757d',
+    fontStyle: 'italic',
+    marginTop: 10,
+  },
+  itemCard: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 10,
+    borderLeftWidth: 5,
+    borderLeftColor: '#007bff',
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  itemDetails: {
+    marginBottom: 10,
+  },
+  itemName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#212529',
+  },
+  itemCourse: {
+    fontSize: 12,
+    color: '#6c757d',
+    marginTop: 2,
+  },
+  itemDesc: {
+    fontSize: 14,
+    color: '#495057',
+    marginTop: 4,
+  },
+  itemPrice: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#28a745',
+    marginTop: 6,
+  },
+  actionRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  editBtn: {
+    backgroundColor: '#ffc107',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 4,
+    marginRight: 8,
+  },
+  deleteBtn: {
+    backgroundColor: '#dc3545',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 4,
+  },
+  actionBtnText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+});
+            
+
+    )
             
             
 
-)
