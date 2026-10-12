@@ -137,6 +137,21 @@ return(
                  <Text style={styles.statsSubText}>Desserts: {countByCourse('Dessert')}</Text>
                  </View>
                  </View>
+
+ {/*--- FORM SECTION---*/}
+ <View style={styles.formContiner}>
+    <Text style={styles.sectionTitle}>
+        {editingId ? 'Edit Menu Item': 'Add New Menu Item'}
+        </Text>
+
+        {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
+         {successMessage ? <Text style={styles.successText}>{successMessage}</Text> : null}
+
+         <TextInput
+         style={styles.onput}
+         placeholder="Dish Name"
+         placeholder
+
             
             
 
