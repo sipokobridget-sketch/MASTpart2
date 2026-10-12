@@ -12,3 +12,12 @@ const [price, setPrice] = useState ('');
 const [menuItems, setMenuItems] = useState([]);
 const [editingId, setEditingId] = useState(null);
 
+//state for search query and course filter 
+const [searchQuery, setSearchQuery] = useState('');
+const [selectedFilterCourse, setSelectdFilterCourse] =useState('All');
+
+//validation and success feedback state 
+const [errorMessage, setErroeMessage] = useState('');
+const [successMessage, setSuccessMessage] = useState('');
+
+//manage menu items 
