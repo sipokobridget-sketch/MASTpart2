@@ -118,3 +118,26 @@ totalItems > 0
     menuItems.reduce ((sum. item)) => + item.price. 0/ totalItems
 ) . toFixed(2)
 : '0.00';
+
+const countByCourse = (courseName) =>
+    menuItems.filter((item) => item.corse === courseName).length;
+
+return(
+    <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.headerTitle}>Chef's Menu Manager</Text>
+
+        {/*--- Statistics SECTION---*/}
+        <view style={styles.statsCard}>
+            <Text style={styles.statsTitle}>Menu Statistics</Text>
+            <Text style={styles.statsText}>Toltal Items: {toatlItems}</Text>
+            <Text style={styles.statsText}>Average Price: R {avaragePrice}</Text>
+            <View style={styles.courseCountRow}>
+                 <Text style={styles.statsSubText}>Starter: {countByCourse('Starter')}</Text>
+                 <Text style={styles.statsSubText}>Mains: {countByCourse('Main Course')}</Text>
+                 <Text style={styles.statsSubText}>Desserts: {countByCourse('Dessert')}</Text>
+                 </View>
+                 </View>
+            
+            
+
+)
