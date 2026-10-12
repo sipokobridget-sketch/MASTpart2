@@ -17,3 +17,7 @@
 '''bash
 git clone <YOUR_GITHUB_LINK>
 cd ChefsMenuManager
+
+## YouTube link 
+
+(https://youtu.be/-anB_Yxh4CI?si=JpUeNnIx0NPlpCb3)
