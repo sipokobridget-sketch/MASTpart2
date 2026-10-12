@@ -19,4 +19,17 @@ const [dishName, setDishName] = useState('');
       setSuccessMessage('');
       return;
     }
-    
+    const parsedPrice = parseFloat(price);
+    if (isNaN(parsedPrice) || parsedPrice <= 0) {
+      setErrorMessage('Please enter a valid price.');
+      setSuccessMessage('');
+      return;
+    }
+
+    const newItem = {
+      id: Date.now().toString(),
+      dishName,
+      description,
+      course,
+      price: parsedPrice,
+    };
