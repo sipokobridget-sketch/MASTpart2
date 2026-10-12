@@ -42,3 +42,20 @@ const [dishName, setDishName] = useState('');
     setCourse('Starter');
     setPrice('');
   };
+return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.headerTitle}>Chef's Menu Manager</Text>
+
+      <View style={styles.formContainer}>
+        <Text style={styles.sectionTitle}>Add New Menu Item</Text>
+
+        {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
+        {successMessage ? <Text style={styles.successText}>{successMessage}</Text> : null}
+
+        <TextInput
+          style={styles.input}
+          placeholder="Dish Name"
+          placeholderTextColor="#888"
+          value={dishName}
+          onChangeText={setDishName}
+        />
