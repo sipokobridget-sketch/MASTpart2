@@ -89,3 +89,22 @@ return (
             </TouchableOpacity>
           ))}
         </View>
+
+        const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    backgroundColor: '#f8f9fa',
+    paddingTop: 50,
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+    color: '#333',
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 10,
+    color: '#444',
