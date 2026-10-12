@@ -59,3 +59,33 @@ return (
           value={dishName}
           onChangeText={setDishName}
         />
+       < TextInput
+          style={styles.input}
+          placeholder="Description"
+          placeholderTextColor="#888"
+          value={description}
+          onChangeText={setDescription}
+        />
+
+        <Text style={styles.label}>Select Course:</Text>
+        <View style={styles.courseSelectRow}>
+          {['Starter', 'Main Course', 'Dessert'].map((c) => (
+            <TouchableOpacity
+              key={c}
+              style={[
+                styles.courseBtn,
+                course === c && styles.courseBtnActive,
+              ]}
+              onPress={() => setCourse(c)}
+            >
+              <Text
+                style={[
+                  styles.courseBtnText,
+                  course === c && styles.courseBtnTextActive,
+                ]}
+              >
+                {c}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
