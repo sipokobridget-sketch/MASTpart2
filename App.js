@@ -33,3 +33,12 @@ const [dishName, setDishName] = useState('');
       course,
       price: parsedPrice,
     };
+    setMenuItems([...menuItems, newItem]);
+    setSuccessMessage('Menu item successfully added!');
+    setErrorMessage('');
+
+    setDishName('');
+    setDescription('');
+    setCourse('Starter');
+    setPrice('');
+  };
