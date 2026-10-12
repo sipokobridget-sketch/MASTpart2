@@ -21,3 +21,36 @@ const [errorMessage, setErroeMessage] = useState('');
 const [successMessage, setSuccessMessage] = useState('');
 
 //manage menu items 
+const handleSaveItem = () => {
+    //Input validation for required fields
+    if (!dishName.trim() || !description.trim() || !price.trim() ){
+        setErrorMessage('All fields are required.');
+        setSuccessMessage('');
+        return;
+
+    }
+}
+
+const parsedPrice = parseFloat(price);
+if (isNaN(parsedPrice) || parsedPrice <= 0){
+     setErrorMessage('Please enter a valid positive price.');
+        setSuccessMessage('');
+        return;
+    
+}
+
+if (editingId) {
+    //update existing item
+    setMenuItems(
+        menuItems.map((item) =>
+        item.id === editingId
+    ? { ...item, dishName, description, course, price: parsedPrice}
+     : item
+      )
+
+    );
+    setSuccessMessage('menu item successfuly updated!');
+    setEditingId(null);
+} else {
+    //
+}
